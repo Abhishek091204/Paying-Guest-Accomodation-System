@@ -6,7 +6,7 @@ const path = require("path")
 const ejsMate = require("ejs-mate");
 app.use(express.urlencoded({ extended: true }));
 const methodOverride = require("method-override");
-app.use(methodOverride("_method"));
+app.use(methodOverride("_method"));  //hi
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 const wrapAsync = require("./utils/wrapAsync.js")
