@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Spartan:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+body {
+    font-family: 'Inter', 'League Spartan', 'Plus Jakarta Sans', sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.add-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+}
+.small-btn {
+    padding: 4px 8px; /* Reduces height and width */
+    font-size: 12px;  /* Smaller text */
+}
+.navbar {
+    height: 5rem;
+    background-color: white;
+}
+
+.container{
+    flex: 1;
+}
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+
+/* styles.css */
+footer {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 40px 0;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3);
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+    animation: glow 15s infinite ease-in-out;
+    pointer-events: none;
+}
+
+.f-info {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.f-info-socials {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.f-info-socials i {
+    font-size: 28px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.f-info-socials i:hover {
+    transform: translateY(-5px) scale(1.1);
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    box-shadow: 0 5px 20px rgba(0, 114, 255, 0.5);
+    color: #ffffff;
+}
+
+.f-info>div:nth-child(2) {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 0.5px;
+    text-align: center;
+    text-transform: uppercase;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.f-info-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.f-info-links a {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+.f-info-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    transition: all 0.4s ease;
+    transform: translateX(-50%);
+}
+
+.f-info-links a:hover::after {
+    width: 100%;
+}
+
+.f-info-links a:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes glow {
+
+    0%,
+    100% {
+        transform: translate(10%, 10%) scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translate(-10%, -10%) scale(1.1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .f-info {
+        padding: 0 20px;
+    }
+
+    .f-info-socials i {
+        font-size: 24px;
+        padding: 10px;
+    }
+
+    .f-info-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .f-info>div:nth-child(2) {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    footer {
+        padding: 30px 0;
+    }
+
+    .f-info-socials {
+        gap: 15px;
+    }
+
+    .f-info-socials i {
+        font-size: 20px;
+        padding: 8px;
+    }
+}
+
+/* Cards */
+
+.card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.card-text {
+    font-weight: 400px;
+}
+
+.listing-link {
+    text-decoration: none;
+}
+
+/* Card Effect */
+
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+}
+
+.small-image {
+    width: 20rem;
+    /* Set a fixed width */
+    height: 20rem;
+    /* Set a fixed height */
+    object-fit: cover;
+    border-radius: 10px;
+    /* Ensures the image fills the space without distortion */
+}
+
+.delete-btn {
+    background-color: #e74c3c; /* Red color for delete action */
+    color: white;             /* White text */
+    border: none;             /* Remove default border */
+    padding: 6px 14px;        /* Vertical and horizontal padding */
+    border-radius: 10px;       /* Rounded corners */
+    font-size: 14px;          /* Text size */
+    cursor: pointer;          /* Hand cursor on hover */
+    text-transform: uppercase; /* Make text all caps */
+}
+
+.delete-btn:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+
+/* Edit Page */
+.edit-btn{
+    background-color: #fe424d;
+    border: none !important;
+}

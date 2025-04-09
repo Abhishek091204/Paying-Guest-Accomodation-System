@@ -1,0 +1,109 @@
+project phase 1(Major Project)Frontend and Backend
+getting started
+
+1.
+Database setup
+REST API
+
+2.Model : Listing -->Place(Apartment,flat,house,villa,hotel,banglow)
+#(basic Requirements)
+title --> string
+description -->string
+Image  --> url
+price --> number
+location -->String
+country -->string
+
+in the video, we created a model of mongodb and saved some data into the database
+
+we created a Models folder inside this folder
+all the models of the project will be made
+model.exports=Listing;
+
+3. 
+Init folder for initialisation
+
+Listing variable contains schema
+we deleted the previous data inserted and inserted the data of data.js file
+
+4.create 
+
+GET    /listings/new  --> form --> sumbit
+
+
+<ul>
+    <%for(let listing of allListings){%>
+    <li><a href="/listings/<%=listing._id%>">
+            <%=listing.title%>
+        </a></li>
+    <%}%>
+</ul>
+
+
+POST   /listings    
+
+
+5.Update : Edit & Update Route
+
+GET
+
+
+6.DELETE
+DELETE  /listing/:id
+
+
+PROJECT(phase 1 b)
+1.We apply the same styling to all pages using ejs-Mate 
+<% layouts(____)-%>
+
+2.Navbar
+include bootstrap and js into the boilerplate 
+
+Modularity in code is important
+
+steps:
+    create a includes folder in views folder 
+    create navbar.ejs which contains the code of header 
+    include it into the boilerplate.ejs using <%-include()%> 
+    we comment out the form in index.ejs
+
+
+
+51.
+
+client-side validations
+Form validations
+When we enter data in the form, the browser andlor the web server will check to see that the data is
+in the correct format and within the constraints set by the application.
+
+Bootstrap validations-->For custom Bootstrap form validation messages, you’ll need to add the novalidate boolean attribute to your <form>
+add the js also to get the function on the form
+script.js
+bootstrap websute 
+font awesome 
+
+success and failure test
+something wrong in Form we enter
+Like agree terms and failure 
+
+
+Custome Error Handler 
+WrapAsync 
+
+Schema Validation
+individual feild check
+joi.dev multiple handling of validation-->npm package
+schema for server side validation
+define validation in schema.js file we newly created 
+require in app.js
+
+Validations for Schema
+Middleware
+
+
+DataBase Relationships
+SQL Relationships
+one to one 
+one to many
+many to many 
+
