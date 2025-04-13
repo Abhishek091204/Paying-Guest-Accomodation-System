@@ -107,3 +107,32 @@ one to one
 one to many
 many to many 
 
+Project Phase2
+Handling Deletion using Mongoose Middleware
+
+one to many 
+users posts 
+
+
+Customer        Order
+when the customer is deleted the order related to it will also be deleted
+
+
+We can use 2 middlewares :
+• Pre - run before the query is executed
+• Post - run after the query is executed
+
+Query middlewares
+
+
+
+New Model : Reviews
+• comment->string
+• rating (1 to 5)->Number
+• createdAt->date,time
+
+
+the are listings for each hotel
+listing1
+listing2
+1*n Relationship
