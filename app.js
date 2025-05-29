@@ -9,8 +9,11 @@ app.use(methodOverride("_method"));  //hi
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 const ExpressError = require("./utils/ExpressError.js")
-const listings=require("./routes/listing.js")
-const reviews=require("./routes/review.js");
+const listings = require("./routes/listing.js")
+const reviews = require("./routes/review.js");
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser())
 
 main().then((res) => {
     console.log("connected to db");
@@ -25,8 +28,8 @@ async function main() {
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-app.use("/listings",listings);
-app.use("/listings/:id/reviews",reviews);
+app.use("/listings", listings);
+app.use("/listings/:id/reviews", reviews);
 // app.get("/testListing", async (req, res) => {
 //     let sampleListing = new Listing({
 //         title: "My new Villa",
@@ -50,22 +53,15 @@ app.use((err, req, res, next) => {
     // res.status(statusCode).send(message);
 })
 
+app.get("/getcookies", (req, res) => {
+    res.cookie("greet", "namaste");
+    res.send("send you some cookies");
+})
+
 app.get("/", (req, res) => {
+    console.dir(req.cookies);
     res.send("Hi i am Root")
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 app.listen(3000, () => {
