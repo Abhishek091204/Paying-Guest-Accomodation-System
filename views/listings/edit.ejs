@@ -5,8 +5,8 @@
             <form method="post" action="/listings/<%=listing._id%>?_method=PUT">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control"="listing[title]" value="<%=listing.title%>" required
-                        placeholder="Enter Title">
+                    <input type="text" class="form-control" name="listing[title]" value="<%= listing.title %>" required
+                        placeholder="Enter Title" />
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
@@ -21,14 +21,14 @@
                     </div>
                     <div class="mb-3 col-md-8">
                         <label for="country" class="form-label">country</label>
-                        <input type="text" class="form-control" name="country" value="<%=listing.country%>" required
+                        <input type="text" class="form-control" name="listing[country]" value="<%=listing.country%>" required
                             placeholder="Enter country">
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Image Link</label>
-                    <input type="text" class="form-control" name="listing[image]" placeholder="Enter Image URL/Link" required
-                        value="<%= listing.image.url %>">
+                    <input type="text" class="form-control" name="listing[image]" placeholder="Enter Image URL/Link"
+                        required value="<%= listing.image.url %>">
                 </div>
                 <div class="mb-3">
                     <label for="location" class="form-label">Location</label>

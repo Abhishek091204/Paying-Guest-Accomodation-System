@@ -136,3 +136,13 @@ the are listings for each hotel
 listing1
 listing2
 1*n Relationship
+
+
+created form for rating 
+submitting a form adding to the database
+pull operator 
+listing review on page
+deleting review using pull operator
+
+
+deleting listing 
