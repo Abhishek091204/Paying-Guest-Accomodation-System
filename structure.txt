@@ -150,3 +150,54 @@ deleting listing
 router 
 
 web cookies
+res.cookie(name.value)
+reading cookie
+
+
+What is State?
+Stateful Protocol
+Stateful Protocol require server to save the status and session information.
+eg - ftp
+Stateless Protocol
+Stateless Protocol does not require the server to retain the server information o
+eg - http
+
+Express sessions
+client  server
+session id
+store in temporary storage
+npm i express-session
+secret
+app.use(session({secret:"mysecretstring"}));    usually strong
+session id saved in the browser
+
+
+SessionOptions 
+by default no expiry data to cookies 
+delete by closing the browser 
+
+const sessionOptions = {
+  secret: "mysecretcode",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3), // 3 days from now
+    maxAge: 1000 * 60 * 60 * 24 * 3, // 3 days in milliseconds
+    httpOnly: true
+  }
+};
+
+Using Flash
+new listing created ->flash message new listing created
+npm i connect-flash
+
+
+we craetd a flash.ejs to display it in includes 
+and include it in the boilerplate
+req.flash(for each review listing update delete etc)
+message will be displayed
+
+
+Flash failure 
+while search the not exist listing diaplsy the message 
+

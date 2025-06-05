@@ -1,55 +1,59 @@
 <% layout("/layouts/boilerplate")-%>
 
-
     <body>
-        <h1>Create A new Listing</h1>
+        <h1>Create A New Listing</h1>
         <form method="post" action="/listings" novalidate class="needs-validation">
             <div class="row">
                 <div class="col-8 offset-2">
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" name="listing[title]" placeholder="Enter Title" required class="form-control">
+                        <input type="text" id="title" name="listing[title]" placeholder="Enter Title" required
+                            class="form-control">
                         <div class="valid-feedback">
                             Title Looks Good
                         </div>
                     </div>
-                    <br>
+
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea name="listing[description]" placeholder="Enter Description"
-                        required class="form-control"></textarea>
+                        <textarea id="description" name="listing[description]" placeholder="Enter Description" required
+                            class="form-control"></textarea>
                     </div>
+
                     <div class="row">
                         <div class="mb-3 col-md-4">
                             <label for="price" class="form-label">Price</label>
-                            <input  required name="listing[price]" placeholder="Enter price" class="form-control">
+                            <input type="number" id="price" name="listing[price]" placeholder="Enter price" required
+                                class="form-control" min="0" step="any">
                             <div class="invalid-feedback">
-                                Price should be Valid
+                                Price should be valid
                             </div>
                         </div>
+
                         <div class="mb-3 col-md-8">
-                            <label for="country" class="form-label">country</label>
-                            <input type="text" required name="country" placeholder="Enter country" class="form-control">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" id="country" name="listing[country]" placeholder="Enter country" required
+                                class="form-control">
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="image" class="form-label">Image</label>
-                        <input type="text" name="listing[image]" placeholder="Enter Image URL/Link" required
+                        <label for="image" class="form-label">Image URL</label>
+                        <input type="url" id="image" name="listing[image]" placeholder="Enter Image URL/Link" required
                             class="form-control">
                     </div>
+
                     <div class="mb-3">
                         <label for="location" class="form-label">Location</label>
-                        <input type="text" required name="listing[location]" placeholder="Enter location" class="form-control">
+                        <input type="text" id="location" name="listing[location]" placeholder="Enter location" required
+                            class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-dark small-btn add-btn">SUBMIT</button>
                     </div>
 
                 </div>
-            </div>
-            <br>
-            <br>
-            <div class="mb-3">
-
-                <button class="btn btn-dark small-btn add-btn">SUBMIT</button>
             </div>
         </form>
     </body>
