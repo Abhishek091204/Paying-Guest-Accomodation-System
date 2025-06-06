@@ -98,8 +98,12 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
 const ExpressError = require("./utils/ExpressError.js");
-const listings = require("./routes/listing.js");
-const reviews = require("./routes/review.js");
+const listingRouter = require("./routes/listing.js");
+const reviewRouter = require("./routes/review.js");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
+const userRouter=require("./routes/user.js");
 
 // Connect to MongoDB
 main().then(() => console.log("connected to db")).catch((err) => console.log(err));
@@ -129,22 +133,34 @@ const sessionOptions = {
 };
 app.use(session(sessionOptions));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
 
 // Flash Middleware
 app.use((req, res, next) => {
-    res.locals.error=req.flash("error");
+    res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
     next();
 });
 
+app.get("/demouser", async (req, res) => {
+    let fakeUser = new User({
+        email: "student@gmail.com",
+        username: "delta-student"
+    })
+    let registeredUser = await User.register(fakeUser, "helloworld")  //password
+    res.send(registeredUser);
+})
 // Routes
 app.get("/", (req, res) => {
     res.send("Hi i am Root");
 });
 
-app.use("/listings", listings);
-app.use("/listings/:id/reviews", reviews);
-
+app.use("/listings", listingRouter);
+app.use("/listings/:id/reviews", reviewRouter);
+app.use("/",userRouter);
 // Test route
 app.get("/test", (req, res) => {
     res.send("Test route working");
