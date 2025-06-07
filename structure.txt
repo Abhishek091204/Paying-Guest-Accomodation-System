@@ -190,7 +190,13 @@ const sessionOptions = {
 Using Flash
 new listing created ->flash message new listing created
 npm i connect-flash
-
+connect-flash
+alert new message once to the user
+middleware 
+compulsory use of sessions in it 
+key and message
+req.flash
+req.locals
 
 we craetd a flash.ejs to display it in includes 
 and include it in the boilerplate
@@ -201,3 +207,69 @@ message will be displayed
 Flash failure 
 while search the not exist listing diaplsy the message 
 
+
+
+Authentication and Authorization
+Authentication
+Authentication is the process of verifying who someone is
+Authorization
+Authorization is the process of verifying what specific applications, files, and data a user has access to
+
+storing password 
+store using hashed form
+using hashing function 
+that we know in information security  
+hash code we get as a output
+
+Hashing
+What we need to know?
+For every input, there is a fixed output
+They are one-way functions, we can't get input from output
+For a different input, there is a different output but of same length
+Small changes in input should bring large changes in output
+
+Salting
+Password salting is a technique to protect passwords stored in databases by adding a
+string of 32 or more characters and then hashing them.
+
+adding at the start/end of the password 
+prevents the hack of passowrd and avoid access 
+
+passport -->express compatiable authentication Middleware for Node.js
+npm i passport
+npm i passport-local  -->Passport for authenticating With a username and password.
+npm i passport-local-mongoose-->
+-->passportjs.org
+
+User Model
+user : username, password, email
+You're free to define your User how you like. Passport-Local Mongoose will add a username,
+hash and salt field to store the username, the hashed password and the salt value.
+Additionally, Passport-Local Mongoose adds some methods to your Schema. See the API
+
+Configurin Strate
+passport.initialize( )
+A middleware that initializes passport.
+passport.session( )
+A web application needs the ability to identify users as they browse from page to page. This series of requests I
+and responses, each associated with the same user, is known as a session.
+passport.use(new LocalStrategy( User.authenticate( ) ))
+
+signUp user 
+GET /signup
+POST /signup
+
+Connecting Login Route
+How to check if user is logged in ?
+
+req.isAuthenticated() //Passport method
+use IsLoggedIn middleware.js where we defined the logic 
+also we passed it as a middleware to many routes like edit ,delete ,etc 
+
+/signup
+/Login
+automatically loggedin and loggedOut
+
+
+creating the middleware saveRedirectUrl to save the session redirecting url if you are not logging so after login you will login to the same page of redirecting 
+use sessions for this

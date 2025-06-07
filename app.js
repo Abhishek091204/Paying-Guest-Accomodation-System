@@ -131,28 +131,29 @@ const sessionOptions = {
         httpOnly: true,
     }
 };
-app.use(session(sessionOptions));
+app.use(session(sessionOptions));   //same order
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
+passport.use(new LocalStrategy(User.authenticate()));  //we define the strategy here then authenticate user
 passport.serializeUser(User.serializeUser());
-
+passport.deserializeUser(User.deserializeUser());
 // Flash Middleware
 app.use((req, res, next) => {
-    res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    res.locals.currUser=req.user;
     next();
 });
 
-app.get("/demouser", async (req, res) => {
-    let fakeUser = new User({
-        email: "student@gmail.com",
-        username: "delta-student"
-    })
-    let registeredUser = await User.register(fakeUser, "helloworld")  //password
-    res.send(registeredUser);
-})
+// app.get("/demouser", async (req, res) => {
+//     let fakeUser = new User({
+//         email: "student@gmail.com",
+//         username: "delta-student"
+//     })
+//     let registeredUser = await User.register(fakeUser, "helloworld")  //password
+//     res.send(registeredUser);
+// })
 // Routes
 app.get("/", (req, res) => {
     res.send("Hi i am Root");

@@ -4,7 +4,7 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const { listingSchema } = require("../schema.js");
 const Listing = require("../models/listing.js");
-
+const { isLoggedIn } = require("../middleware.js");
 const validateListing = (req, res, next) => {
     let { error } = listingSchema.validate(req.body);
     if (error) {
@@ -22,24 +22,21 @@ router.get("/", wrapAsync(async (req, res) => {
 }));
 
 // New Listing Form
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
     res.render("listings/new.ejs");
 });
 
 // Create Listing
-router.post("/", validateListing, wrapAsync(async (req, res) => {
-    // Already validated by middleware, no need to validate again here
-    if (result.error) {
-        throw new ExpressError(400, result.error); // <--- this might trigger after response is sent
-    }
+router.post("/", isLoggedIn, validateListing, wrapAsync(async (req, res) => {
     const newData = new Listing(req.body.listing);
     await newData.save();
     req.flash("success", "New listing created!!");
     res.redirect("/listings");
 }));
 
+
 // Edit Route - show edit form
-router.get("/:id/edit", wrapAsync(async (req, res) => {
+router.get("/:id/edit", isLoggedIn, wrapAsync(async (req, res) => {
     const { id } = req.params;
     const listing = await Listing.findById(id);
     if (!listing) {
@@ -49,7 +46,7 @@ router.get("/:id/edit", wrapAsync(async (req, res) => {
 }));
 
 // Update Route
-router.put("/:id", validateListing, wrapAsync(async (req, res) => {
+router.put("/:id", isLoggedIn, validateListing, wrapAsync(async (req, res) => {
     const { id } = req.params;
     const updatedListing = await Listing.findByIdAndUpdate(id, { ...req.body.listing }, { new: true });
     if (!updatedListing) {
@@ -64,11 +61,12 @@ router.get("/:id", wrapAsync(async (req, res) => {
     const { id } = req.params;
     const listing = await Listing.findById(id).populate("reviews");
     if (!listing) {
-        req.flash("error","listing not found")
-        res.redirect("/listings");
+        req.flash("error", "listing not found");
+        return res.redirect("/listings"); // ✅ ADD return here
     }
     res.render("listings/show.ejs", { listing });
 }));
+
 
 // Delete Route
 router.delete("/:id", wrapAsync(async (req, res) => {
