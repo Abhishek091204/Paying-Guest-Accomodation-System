@@ -15,6 +15,11 @@
                             <%=listing.description%>
                         </li>
                         <li class="list-group-item">
+                            <i>
+                                <strong>Owned By: </strong>
+                                <%=listing.owner[0].username%>
+                            </i>
+                            <hr>
                             <strong>Image:</strong>
                             <img src="<%= listing.image.url %>" alt="Listing Image" class="img-fluid rounded mt-2"
                                 style="max-width: 300px;">
@@ -34,12 +39,12 @@
                 </div>
             </div>
 
-            <div class="mt-3">
-                <a href="/listings/<%=listing._id%>/edit" class="btn btn-primary me-2">Edit this listing</a>
-                <form method="post" action="/listings/<%= listing._id %>?_method=DELETE" class="d-inline">
-                    <button class="btn btn-danger">DELETE</button>
-                </form>
-            </div>
+                <div class="mt-3">
+                    <a href="/listings/<%=listing._id%>/edit" class="btn btn-primary me-2">EDIT</a>
+                    <form method="post" action="/listings/<%= listing._id %>?_method=DELETE" class="d-inline">
+                        <button class="btn btn-danger">DELETE</button>
+                    </form>
+                </div>
         </div>
         <div class="mb-3 mt-3">
             <hr>

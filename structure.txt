@@ -273,3 +273,14 @@ automatically loggedin and loggedOut
 
 creating the middleware saveRedirectUrl to save the session redirecting url if you are not logging so after login you will login to the same page of redirecting 
 use sessions for this
+
+initData.data = initData.data.map((obj) => ({ ...obj, owner: "6841a91db373d94dcc5669e7" }));
+using this code we can add new schema in the database;
+
+showing who own the listing ->owner;
+
+starting with Authorization
+who will able to edit the listing
+listing owner;
+edit/delete user;
+
