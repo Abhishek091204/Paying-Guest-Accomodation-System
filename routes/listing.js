@@ -4,9 +4,7 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const { listingSchema } = require("../schema.js");
 const Listing = require("../models/listing.js");
-const { isLoggedIn, IsOwner,validateListing } = require("../middleware.js");
-
-
+const { isLoggedIn, IsOwner, validateListing } = require("../middleware.js");
 
 // Index Route
 router.get("/", wrapAsync(async (req, res) => {
@@ -22,7 +20,6 @@ router.get("/new", isLoggedIn, (req, res) => {
 // Create Listing
 router.post("/", isLoggedIn, validateListing, wrapAsync(async (req, res) => {
     const newListing = new Listing(req.body.listing);
-    // Since owner is an array in schema, assign as array with one ObjectId
     newListing.owner = [req.user._id];
     await newListing.save();
     req.flash("success", "New listing created!");
@@ -43,27 +40,27 @@ router.get("/:id/edit", isLoggedIn, IsOwner, wrapAsync(async (req, res) => {
 // Update Route
 router.put("/:id", isLoggedIn, IsOwner, validateListing, wrapAsync(async (req, res) => {
     const { id } = req.params;
-
-    // Update listing with new data
     const updatedListing = await Listing.findByIdAndUpdate(id, { ...req.body.listing }, { new: true });
-
     if (!updatedListing) {
         throw new ExpressError(404, "Listing not found");
     }
-
     req.flash("success", "Listing updated successfully!");
     res.redirect(`/listings/${id}`);
 }));
 
-// Show Route - show details for one listing
 router.get("/:id", isLoggedIn, wrapAsync(async (req, res) => {
     const { id } = req.params;
-    const listing = await Listing.findById(id).populate("reviews").populate("owner");
+    const listing = await Listing.findById(id)
+    .populate({
+        path: "reviews",
+        populate: { path: "author" }
+    })
+    .populate("owner");
     if (!listing) {
         req.flash("error", "Listing not found");
         return res.redirect("/listings");
     }
-    res.render("listings/show.ejs", { listing });
+    res.render("listings/show.ejs", { listing, currUser: req.user }); // ✅ pass currUser
 }));
 
 // Delete Route

@@ -13,10 +13,10 @@ const reviewSchema = new Schema({
         default: Date.now()
     },
     author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
-  },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
 });
 
-module.exports =mongoose.model("Review",reviewSchema);
-
+module.exports = mongoose.model("Review", reviewSchema);
