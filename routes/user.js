@@ -6,25 +6,25 @@ const { saveRedirectUrl } = require("../middleware.js");
 const userController = require("../controllers/users.js");
 const user = require("../models/user.js");
 
-// GET: Signup form
-router.get("/signup",userController.renderSignupForm);
+router.route("/signup")
+    // GET: Signup form
+    .get(userController.renderSignupForm)
+    // POST: Signup logic
+    .post(userController.signUp);
 
-// POST: Signup logic
-router.post("/signup", userController.signUp);
 
-// GET: Login form
-router.get("/login", userController.renderLoginForm);
-
-// POST: Login logic
-router.post(
-    "/login",
-    saveRedirectUrl,
-    passport.authenticate("local", {
-        failureRedirect: "/login",
-        failureFlash: true,
-    }),
-    userController.login
-);
+router.route("/login")
+    // GET: Login form
+    .get(userController.renderLoginForm)
+    // POST: Login logic
+    .post(
+        saveRedirectUrl,
+        passport.authenticate("local", {
+            failureRedirect: "/login",
+            failureFlash: true,
+        }),
+        userController.login
+    );
 
 // GET: Logout
 router.get("/logout", userController.logout);

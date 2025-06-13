@@ -305,4 +305,8 @@ Resume -> used MVC framework;
 
 
 #router.route
+example --> 
+router.route("/")
+    .get(wrapAsync(listingController.index))
+    .post(isLoggedIn, validateListing, wrapAsync(listingController.createListing));
 
