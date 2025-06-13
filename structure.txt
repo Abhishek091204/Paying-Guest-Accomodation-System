@@ -289,11 +289,20 @@ author/owner/createdBy
 
 
 Project Phase 3
-#1 Model,view,controller
+#1 Model,view,controller(MVC)
 pattern of writing code 
 
 folders
 Model
 View 
 controller->storing core functionality of backend
+making code readable
+making controller folder and replacing the index route logic in controller folder
+shifting the logic from listing.js to controller/listings.js folder 
+same for review and user 
+
+Resume -> used MVC framework;
+
+
+#router.route
 

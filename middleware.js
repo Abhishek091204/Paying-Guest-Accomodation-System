@@ -58,20 +58,24 @@ module.exports.validateReview = (req, res, next) => {
 }
 
 module.exports.IsReviewAuthor = async (req, res, next) => {
-    const { id,reviewId } = req.params;
+    const { id, reviewId } = req.params;
     const review = await Review.findById(reviewId);
+
     if (!review) {
-        req.flash("error", "Listing not found");
+        req.flash("error", "Review not found");
         return res.redirect("/listings");
     }
 
-    // Check if logged-in user is one of the owners (owner is an array)
+    // SAFELY check if author exists before calling .equals()
     if (
-        !res.locals.currUser || 
-        !review.author.some(ownerId => ownerId.equals(res.locals.currUser._id))
+        !res.locals.currUser ||
+        !review.author ||
+        !review.author.equals(res.locals.currUser._id)
     ) {
         req.flash("error", "You are not the author of this review");
         return res.redirect(`/listings/${id}`);
     }
+
     next();
 };
+
