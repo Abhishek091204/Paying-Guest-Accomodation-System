@@ -25,7 +25,10 @@ module.exports.showListing = async (req, res) => {
 }
 
 module.exports.createListing = async (req, res) => {
+    let url = req.file.path;
+    let filename = req.file.filename;
     const newListing = new Listing(req.body.listing);
+    newListing.image = { url, filename };
     newListing.owner = [req.user._id];
     await newListing.save();
     req.flash("success", "New listing created!");
@@ -45,6 +48,12 @@ module.exports.renderEdit = async (req, res) => {
 module.exports.updateListing = async (req, res) => {
     const { id } = req.params;
     const updatedListing = await Listing.findByIdAndUpdate(id, { ...req.body.listing }, { new: true });
+    if (typeof req.file!="undefined") {
+        let url = req.file.path;
+        let filename = req.file.filename;
+        updatedListing.image = { url, filename }
+        await updatedListing.save();
+    }
     if (!updatedListing) {
         throw new ExpressError(404, "Listing not found");
     }

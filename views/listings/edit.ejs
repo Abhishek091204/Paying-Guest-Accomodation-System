@@ -1,44 +1,105 @@
-<% layout("/layouts/boilerplate")-%>
-    <div class="row mt-3">
-        <div class="col-8 offset-2">
-            <h1>Edit your Listing</h1>
-            <form method="post" action="/listings/<%=listing._id%>?_method=PUT">
+<% layout("/layouts/boilerplate") -%>
+
+<div class="row mt-3">
+    <div class="col-md-8 offset-md-2">
+        <h1 class="mb-4">Edit Your Listing</h1>
+
+        <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" enctype="multipart/form-data" novalidate class="needs-validation">
+            <!-- Title -->
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input 
+                    type="text" 
+                    id="title" 
+                    name="listing[title]" 
+                    class="form-control" 
+                    value="<%= listing.title %>" 
+                    placeholder="Enter Title" 
+                />
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea 
+                    id="description"
+                    name="listing[description]" 
+                    class="form-control" 
+                    rows="4" 
+                    placeholder="Enter Description"
+                ><%= listing.description %></textarea>
+            </div>
+
+            <!-- Price and Country -->
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input 
+                        type="number" 
+                        id="price"
+                        name="listing[price]" 
+                        class="form-control" 
+                        value="<%= listing.price %>" 
+                        placeholder="Enter Price" 
+                        min="0" 
+                        step="0.01" 
+                    />
+                </div>
+
+                <div class="col-md-8 mb-3">
+                    <label for="country" class="form-label">Country</label>
+                    <input 
+                        type="text" 
+                        id="country"
+                        name="listing[country]" 
+                        class="form-control" 
+                        value="<%= listing.country %>" 
+                        placeholder="Enter Country" 
+                    />
+                </div>
+            </div>
+
+            <!-- Existing Image Preview -->
+            <% if (listing.image && listing.image.url) { %>
                 <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" name="listing[title]" value="<%= listing.title %>" required
-                        placeholder="Enter Title" />
+                    <label class="form-label">Current Image:</label><br>
+                    <img 
+                        src="<%= listing.image.url %>" 
+                        alt="Listing Image" 
+                        class="img-thumbnail mb-2" 
+                        style="max-height: 200px;"
+                    >
                 </div>
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea name="listing[description]" class="form-control" placeholder="Enter text" required
-                        id=""><%=listing.description%></textarea>
-                </div>
-                <div class="row mt-3">
-                    <div class="mb-3 col-md-4">
-                        <label for="price" class="form-label">Price</label>
-                        <input type="number" class="form-control" name="listing[price]" value="<%=listing.price%>"
-                            required placeholder="Enter price">
-                    </div>
-                    <div class="mb-3 col-md-8">
-                        <label for="country" class="form-label">country</label>
-                        <input type="text" name="listing[country]" value="<%= listing.country %>" placeholder="Enter country" />
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="image" class="form-label">Image Link</label>
-                    <input type="text" class="form-control" name="listing[image]" placeholder="Enter Image URL/Link"
-                        required value="<%= listing.image.url %>">
-                </div>
-                <div class="mb-3">
-                    <label for="location" class="form-label">Location</label>
-                    <input type="text" class="form-control" name="listing[location]" value="<%=listing.location%>"
-                        required placeholder="Enter location">
-                </div>
-                <button class="btn btn-dark edit-btn mt-3">Edit</button>
-            </form>
-        </div>
+            <% } %>
+
+            <!-- Upload New Image -->
+            <div class="mb-3">
+                <label for="image" class="form-label">Replace Image (optional)</label>
+                <input 
+                    type="file" 
+                    id="image"
+                    name="image" 
+                    class="form-control" 
+                />
+            </div>
+
+            <!-- Location -->
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input 
+                    type="text" 
+                    id="location"
+                    name="listing[location]" 
+                    class="form-control" 
+                    value="<%= listing.location %>" 
+                    placeholder="Enter Location" 
+                />
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn btn-dark mt-3">Save Changes</button>
+        </form>
     </div>
+</div>
 
-    </html>
-
-    <script src="/public/js/script.js"></script>
+<script src="/public/js/script.js"></script>

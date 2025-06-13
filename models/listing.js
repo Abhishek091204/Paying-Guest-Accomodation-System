@@ -12,12 +12,8 @@ const listingSchema = new Schema({
         type: String
     },
     image: {
-        filename: { type: String, default: "default-image.jpg" },
-        url: {
-            type: String,
-            default: "https://manage.isleblue.co/uploads/villas/images/1746/bvis-villa-on-the-beach-2019-header_large.jpg",
-            set: (v) => v === "" ? "https://manage.isleblue.co/uploads/villas/images/1746/bvis-villa-on-the-beach-2019-header_large.jpg" : v
-        }
+        url:String,
+        filename:String,
     },
     price: Number,
     location: String,

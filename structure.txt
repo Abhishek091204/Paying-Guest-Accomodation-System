@@ -310,3 +310,42 @@ router.route("/")
     .get(wrapAsync(listingController.index))
     .post(isLoggedIn, validateListing, wrapAsync(listingController.createListing));
 
+starability library
+https://github.com/LunarLogic/starability
+
+image Upload 
+
+Manipulating Form
+enctype
+npm i multer multi-part form 
+const multer = require("multer")
+const upload = multer({ dest: "uploads/" })
+upload single method 
+req.file 
+uploads folder
+
+
+#cloud setup
+dont share credentials 
+cloudinary 
+.env file 
+environment variables 
+key value pair 
+KEY=value
+dotenv package->to load env file 
+
+store credentials into env file
+
+Store Files
+Multer Store Cloudinary
+npm i cloudinary multer-storage-cloudinary
+
+cloudinary.config(join )
+storage 
+store the data on cloudinary
+
+form->backend->cloud->return link/url
+
+save link in mongodb database 
+    let url=req.file.path;
+    let filename=req.file.filename;
