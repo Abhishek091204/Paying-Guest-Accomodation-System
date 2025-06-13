@@ -286,3 +286,14 @@ edit/delete user;
 
 Setting Authorization for review
 author/owner/createdBy
+
+
+Project Phase 3
+#1 Model,view,controller
+pattern of writing code 
+
+folders
+Model
+View 
+controller->storing core functionality of backend
+
