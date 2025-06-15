@@ -363,3 +363,9 @@ Geocoding
 Geocoding is the process of converting addresses (like a street address) into geographic coordinates (like
 latitude and longitude), which you can use to place markers on a map, or position the map.
 npm install @mapbox/mapbox-sdk
+
+storing coordinates in GeoJson format of mongoose 
+
+using MapMarker-> use docs 
+
+marker PopUp
