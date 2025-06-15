@@ -17,12 +17,14 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Spartan:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/css/rating.css">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
 </head>
 
 <body>
     <%- include("../includes/navbar.ejs")%>
         <div class="container">
-        <%- include("../includes/flash.ejs") %>
+            <%- include("../includes/flash.ejs") %>
                 <%-body%>
         </div>
 

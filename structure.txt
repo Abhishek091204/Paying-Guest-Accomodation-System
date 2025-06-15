@@ -349,3 +349,17 @@ form->backend->cloud->return link/url
 save link in mongodb database 
     let url=req.file.path;
     let filename=req.file.filename;
+
+cloudinary image transformation
+updation in the link
+
+#getting started with maps
+location of listing
+GoogleMaps API--> mostly used
+we use Mapbox
+Mapbox GLJS
+
+Geocoding
+Geocoding is the process of converting addresses (like a street address) into geographic coordinates (like
+latitude and longitude), which you can use to place markers on a map, or position the map.
+npm install @mapbox/mapbox-sdk

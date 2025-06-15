@@ -7,22 +7,27 @@ body {
     min-height: 100vh;
 }
 
-.add-btn{
+.add-btn {
     background-color: #fe424d !important;
     border: none !important;
 }
+
 .small-btn {
-    padding: 4px 8px; /* Reduces height and width */
-    font-size: 12px;  /* Smaller text */
+    padding: 4px 8px;
+    /* Reduces height and width */
+    font-size: 12px;
+    /* Smaller text */
 }
+
 .navbar {
     height: 5rem;
     background-color: white;
 }
 
-.container{
+.container {
     flex: 1;
 }
+
 .fa-compass {
     color: #fe424d;
     font-size: 2rem;
@@ -246,23 +251,36 @@ footer::before {
 }
 
 .delete-btn {
-    background-color: #e74c3c; /* Red color for delete action */
-    color: white;             /* White text */
-    border: none;             /* Remove default border */
-    padding: 6px 14px;        /* Vertical and horizontal padding */
-    border-radius: 10px;       /* Rounded corners */
-    font-size: 14px;          /* Text size */
-    cursor: pointer;          /* Hand cursor on hover */
-    text-transform: uppercase; /* Make text all caps */
+    background-color: #e74c3c;
+    /* Red color for delete action */
+    color: white;
+    /* White text */
+    border: none;
+    /* Remove default border */
+    padding: 6px 14px;
+    /* Vertical and horizontal padding */
+    border-radius: 10px;
+    /* Rounded corners */
+    font-size: 14px;
+    /* Text size */
+    cursor: pointer;
+    /* Hand cursor on hover */
+    text-transform: uppercase;
+    /* Make text all caps */
 }
 
 .delete-btn:hover {
-    background-color: #c0392b; /* Darker red on hover */
+    background-color: #c0392b;
+    /* Darker red on hover */
 }
 
 /* Edit Page */
-.edit-btn{
+.edit-btn {
     background-color: #fe424d;
     border: none !important;
 }
 
+#map {
+    height: 400px;
+    width: 60vh;
+}
