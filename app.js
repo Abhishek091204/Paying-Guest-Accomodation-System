@@ -12,13 +12,14 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
 const ExpressError = require("./utils/ExpressError.js");
+const MongoStore = require("connect-mongo")
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 const userRouter = require("./routes/user.js");
-const dbUrl=process.env.ATLASDB_URL;
+const dbUrl = process.env.ATLASDB_URL;
 // Connect to MongoDB
 // main().then(() => console.log("connected to db")).catch((err) => console.log(err));
 // async function main() {
@@ -39,7 +40,19 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use(cookieParser());
 
 // Session
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto: {
+        secret: "mysupersecretcode",
+    },
+    touchAfter: 24 * 3600,
+})
+
+store.on("error", (err) => {
+    console.log("Error on Mongo Session store", err);
+})
 const sessionOptions = {
+    store: store,
     secret: "mysupersecretcode",
     resave: false,
     saveUninitialized: true,
@@ -49,6 +62,8 @@ const sessionOptions = {
         httpOnly: true,
     }
 };
+
+
 app.use(session(sessionOptions));   //same order
 app.use(flash());
 app.use(passport.initialize());

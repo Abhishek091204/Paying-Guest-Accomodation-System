@@ -369,3 +369,10 @@ storing coordinates in GeoJson format of mongoose
 using MapMarker-> use docs 
 
 marker PopUp
+
+
+
+Using Mongo Atlas
+
+#mongo session store
+npm i connect-mongo
