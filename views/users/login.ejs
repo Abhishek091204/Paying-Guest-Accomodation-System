@@ -1,18 +1,418 @@
 <% layout("layouts/boilerplate") -%>
 
-<div class="row mt-5">
-    <div class="col-md-6 offset-md-3">
-        <h1 class="text-center mb-4">Login to WanderLust</h1>
-        <form action="/login" method="POST" class="needs-validation" novalidate>
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" id="username" name="username" required class="form-control">
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login to WanderLust</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+        <style>
+            body {
+                background: #ffffff;
+                min-height: 100vh;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            .login-container {
+                background: #ffffff;
+                border-radius: 12px;
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+                border: 1px solid #dddddd;
+                padding: 3rem 2rem;
+                margin-top: 5vh;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .form-control {
+                border: 1px solid #dddddd;
+                border-radius: 8px;
+                padding: 12px 16px;
+                font-size: 16px;
+                transition: all 0.2s ease;
+                background: #ffffff;
+            }
+
+            .form-control:focus {
+                border-color: #FF385C;
+                box-shadow: 0 0 0 2px rgba(255, 56, 92, 0.1);
+                background: white;
+            }
+
+            .form-control.is-invalid {
+                border-color: #dc3545;
+                animation: shake 0.5s ease-in-out;
+            }
+
+            @keyframes shake {
+
+                0%,
+                100% {
+                    transform: translateX(0);
+                }
+
+                25% {
+                    transform: translateX(-5px);
+                }
+
+                75% {
+                    transform: translateX(5px);
+                }
+            }
+
+            .form-label {
+                font-weight: 600;
+                color: #495057;
+                margin-bottom: 8px;
+            }
+
+            .btn-success {
+                background: #FF385C;
+                border: none;
+                border-radius: 8px;
+                padding: 14px;
+                font-weight: 600;
+                font-size: 16px;
+                transition: all 0.2s ease;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .btn-success:hover {
+                background: #E31C5F;
+                transform: none;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+            }
+
+            .btn-success:active {
+                transform: translateY(0);
+            }
+
+            .btn-success.loading {
+                pointer-events: none;
+            }
+
+            .btn-success.loading::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 20px;
+                height: 20px;
+                margin: -10px 0 0 -10px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                border-top: 2px solid white;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .welcome-text {
+                color: #6c757d;
+                font-size: 18px;
+                margin-bottom: 2rem;
+                text-align: center;
+            }
+
+            .input-group-text {
+                background: transparent;
+                border: 2px solid #e9ecef;
+                border-right: none;
+                border-radius: 12px 0 0 12px;
+                color: #6c757d;
+            }
+
+            .input-group .form-control {
+                border-left: none;
+                border-radius: 0 12px 12px 0;
+            }
+
+            .input-group:focus-within .input-group-text {
+                border-color: #667eea;
+                color: #667eea;
+            }
+
+            .password-toggle {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                color: #6c757d;
+                cursor: pointer;
+                z-index: 10;
+            }
+
+            .password-toggle:hover {
+                color: #667eea;
+            }
+
+            .invalid-feedback {
+                display: block;
+                color: #dc3545;
+                font-size: 14px;
+                margin-top: 5px;
+            }
+
+            .floating-elements {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                overflow: hidden;
+            }
+
+            .floating-element {
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+                animation: float 6s ease-in-out infinite;
+            }
+
+            .floating-element:nth-child(1) {
+                left: 10%;
+                animation-delay: 0s;
+            }
+
+            .floating-element:nth-child(2) {
+                left: 20%;
+                animation-delay: 1s;
+            }
+
+            .floating-element:nth-child(3) {
+                left: 70%;
+                animation-delay: 2s;
+            }
+
+            .floating-element:nth-child(4) {
+                left: 80%;
+                animation-delay: 3s;
+            }
+
+            @keyframes float {
+
+                0%,
+                100% {
+                    transform: translateY(100vh) rotate(0deg);
+                    opacity: 0;
+                }
+
+                50% {
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: translateY(-100px) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+
+            .brand-logo {
+                font-size: 2.5rem;
+                font-weight: 700;
+                background: linear-gradient(45deg, #667eea, #764ba2);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                margin-bottom: 1rem;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-md-6 offset-md-3">
+                    <div class="login-container">
+                        <div class="text-center">
+                            <div class="brand-logo">WanderLust</div>
+                            </h1>
+                            <p class="welcome-text">Log in to your account</p>
+                        </div>
+
+                        <form action="/login" method="POST" class="needs-validation" novalidate id="loginForm">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">
+                                    <i class="fas fa-user me-2"></i>Username
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <input type="text" id="username" name="username" required class="form-control"
+                                        placeholder="Enter your username" autocomplete="username">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="password" class="form-label">
+                                    <i class="fas fa-lock me-2"></i>Password
+                                </label>
+                                <div class="input-group position-relative">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input type="password" id="password" name="password" required class="form-control"
+                                        placeholder="Enter your password" autocomplete="current-password">
+                                    <button type="button" class="password-toggle" onclick="togglePassword()">
+                                        <i class="fas fa-eye" id="passwordToggleIcon"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-success w-100" id="loginButton">
+                                <span id="buttonText">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Login
+                                </span>
+                            </button>
+
+                            <div class="text-center mt-3">
+                                <small style="color: #717171;">
+                                    Don't have an account? <a href="/signup"
+                                        style="color: #FF385C; text-decoration: none; font-weight: 600;">Sign up</a>
+                                </small>
+                            </div>
+                        </form>
+                    </div>
+                    <br>
+                    <br>
+
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" name="password" required class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success w-100">Login</button>
-        </form>
-    </div>
-</div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // Enhanced form validation
+            (function () {
+                'use strict';
+
+                const form = document.getElementById('loginForm');
+                const usernameInput = document.getElementById('username');
+                const passwordInput = document.getElementById('password');
+                const loginButton = document.getElementById('loginButton');
+                const buttonText = document.getElementById('buttonText');
+
+                // Real-time validation
+                usernameInput.addEventListener('input', function () {
+                    validateUsername();
+                });
+
+                passwordInput.addEventListener('input', function () {
+                    validatePassword();
+                });
+
+                function validateUsername() {
+                    const username = usernameInput.value.trim();
+                    if (username.length < 3) {
+                        usernameInput.classList.add('is-invalid');
+                        usernameInput.classList.remove('is-valid');
+                        return false;
+                    } else {
+                        usernameInput.classList.remove('is-invalid');
+                        usernameInput.classList.add('is-valid');
+                        return true;
+                    }
+                }
+
+                function validatePassword() {
+                    const password = passwordInput.value;
+                    if (password.length < 6) {
+                        passwordInput.classList.add('is-invalid');
+                        passwordInput.classList.remove('is-valid');
+                        return false;
+                    } else {
+                        passwordInput.classList.remove('is-invalid');
+                        passwordInput.classList.add('is-valid');
+                        return true;
+                    }
+                }
+
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    const isUsernameValid = validateUsername();
+                    const isPasswordValid = validatePassword();
+
+                    if (isUsernameValid && isPasswordValid) {
+                        // Show loading state
+                        loginButton.classList.add('loading');
+                        buttonText.innerHTML = 'Signing in...';
+                        loginButton.disabled = true;
+
+                        // Simulate form submission (remove this in actual implementation)
+                        setTimeout(() => {
+                            // In real implementation, the form would submit normally
+                            // For demo purposes, we'll reset the button
+                            loginButton.classList.remove('loading');
+                            buttonText.innerHTML = '<i class="fas fa-sign-in-alt me-2"></i>Login';
+                            loginButton.disabled = false;
+
+                            // Actually submit the form in real implementation
+                            form.submit();
+                        }, 2000);
+                    }
+
+                    form.classList.add('was-validated');
+                });
+
+                // Add focus effects
+                [usernameInput, passwordInput].forEach(input => {
+                    input.addEventListener('focus', function () {
+                        this.parentElement.style.transform = 'scale(1.02)';
+                    });
+
+                    input.addEventListener('blur', function () {
+                        this.parentElement.style.transform = 'scale(1)';
+                    });
+                });
+            })();
+
+            // Password toggle functionality
+            function togglePassword() {
+                const passwordInput = document.getElementById('password');
+                const toggleIcon = document.getElementById('passwordToggleIcon');
+
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    toggleIcon.classList.remove('fa-eye');
+                    toggleIcon.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    toggleIcon.classList.remove('fa-eye-slash');
+                    toggleIcon.classList.add('fa-eye');
+                }
+            }
+
+            // Keyboard accessibility
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' && (e.target === usernameInput || e.target === passwordInput)) {
+                    form.dispatchEvent(new Event('submit'));
+                }
+            });
+
+            // Auto-focus on username field
+            window.addEventListener('load', function () {
+                usernameInput.focus();
+            });
+        </script>
+    </body>
+
+    </html>

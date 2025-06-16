@@ -18,11 +18,15 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 const userRouter = require("./routes/user.js");
-
+const dbUrl=process.env.ATLASDB_URL;
 // Connect to MongoDB
+// main().then(() => console.log("connected to db")).catch((err) => console.log(err));
+// async function main() {
+//     await mongoose.connect("mongodb://127.0.0.1:27017/WanderLust");
+// }
 main().then(() => console.log("connected to db")).catch((err) => console.log(err));
 async function main() {
-    await mongoose.connect("mongodb://127.0.0.1:27017/WanderLust");
+    await mongoose.connect(dbUrl);
 }
 
 // App Config
@@ -69,9 +73,9 @@ app.use((req, res, next) => {
 //     res.send(registeredUser);
 // })
 // Routes
-app.get("/", (req, res) => {
-    res.send("Hi i am Root");
-});
+// app.get("/", (req, res) => {
+//     res.send("Hi i am Root");
+// });
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
